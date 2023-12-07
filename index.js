@@ -15,19 +15,23 @@ const app = express();
 //     origin: ['http://localhost:3000',' http://192.168.1.37:3000'], // Replace with your allowed origins
 //   }));
 
-app.use(cors());
+app.use(cors({
+    origin: 'https://mkp-todo.netlify.app'
+}));
+
+// app.use(cors());
 
 // used to get the json directly form the body
-app.use(bodyParser.json()); 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const taskRouter = require('./routes/tasksRoutes')
 const authRouter = require('./routes/authRoutes')
 
-app.use('/api',authRouter)
-app.use('/api',taskRouter)
+app.use('/api', authRouter)
+app.use('/api', taskRouter)
 
-app.listen(port,()=>{
+app.listen(port, () => {
     // console.clear();
     console.log('--------------------------------------------------------------------------------------\n')
     console.log(`listening on port http://localhost:${port}\n\n`);
